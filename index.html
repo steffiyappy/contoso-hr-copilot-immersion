@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Contoso Malaysia · M365 Copilot HR Immersion</title>
+<style>
+:root{--radius:12px;--shadow:0 2px 8px rgba(0,0,0,.12);--hr:#0f766e}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1020;--panel:#0e1633;--panel2:#0a1228;--ink:#e2e8f0;--muted:#94a3b8;--border:#1e2d4a;--sidebar-a:#0c2218;--sidebar-b:#071510;--accent:#10b981;--accent2:#34d399;--nav-hover:#0d2c1e;--badge-bg:#0a0f24;--cp-info:#0e1c2c;--cp-warn:#2b220e;--cp-bad:#2b1414;--cp-good:#0e2418;--code:#0d1535;--good:#22c55e;--warn:#f59e0b;--danger:#ef4444;--callout-info:#0e1c2c;--callout-warn:#2b220e;--callout-bad:#2b1414;--callout-good:#0e2418}}
+@media(prefers-color-scheme:light){:root{--bg:#f0f4f8;--panel:#ffffff;--panel2:#f0fdf8;--ink:#1a202c;--muted:#64748b;--border:#d1d9e6;--sidebar-a:#064e3b;--sidebar-b:#022c22;--accent:#059669;--accent2:#047857;--nav-hover:#dcfce7;--badge-bg:#ecfdf5;--cp-info:#eff6ff;--cp-warn:#fffbeb;--cp-bad:#fef2f2;--cp-good:#f0fdf4;--code:#1e2b55;--good:#16a34a;--warn:#d97706;--danger:#dc2626;--callout-info:#eff6ff;--callout-warn:#fffbeb;--callout-bad:#fef2f2;--callout-good:#f0fdf4}}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:15px/1.55 "Inter","Segoe UI",system-ui,sans-serif;}
+a{color:var(--accent2);text-decoration:none}a:hover{text-decoration:underline}
+code,pre{font-family:"JetBrains Mono","Consolas",monospace;font-size:13px}
+.layout{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+aside{background:linear-gradient(180deg,var(--sidebar-a),var(--sidebar-b));border-right:1px solid var(--border);padding:24px 18px;position:sticky;top:0;height:100vh;overflow-y:auto;color:#e2e8f0}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.brand .logo{width:36px;height:36px;border-radius:9px;background:var(--hr);display:grid;place-items:center;font-weight:900;color:#fff;font-size:12px;letter-spacing:-.5px}
+.brand h1{font-size:15px;margin:0;letter-spacing:.2px;color:#fff}
+.tag{font-size:11px;color:#94a3b8;margin-bottom:18px}
+nav h3{font-size:10px;letter-spacing:1.2px;color:#94a3b8;text-transform:uppercase;margin:18px 0 8px}
+nav a{display:block;color:#e2e8f0;padding:8px 10px;border-radius:9px;font-size:14px;margin-bottom:2px;border:1px solid transparent}
+nav a:hover{background:rgba(255,255,255,.12);text-decoration:none;border-color:rgba(255,255,255,.2);color:#fff}
+nav a.active{background:rgba(16,185,129,.25);border-color:#10b981;color:#6ee7b7}
+main{padding:28px 40px 80px;max-width:1080px}
+.hero{background:radial-gradient(800px 320px at 0% 0%,rgba(5,80,60,.4),transparent 60%),radial-gradient(700px 280px at 100% 0%,rgba(4,120,87,.2),transparent 60%),var(--panel);border:1px solid var(--border);border-radius:18px;padding:30px;margin-bottom:24px}
+.hero .pill{display:inline-block;background:var(--badge-bg);border:1px solid var(--border);color:var(--accent2);font-size:11px;letter-spacing:1.2px;padding:4px 10px;border-radius:999px;margin-bottom:12px}
+.hero h2{font-size:30px;margin:0 0 8px;line-height:1.2}
+.hero p{color:var(--muted);margin:0;max-width:780px}
+.meta-row{display:flex;flex-wrap:wrap;gap:18px;margin-top:18px;color:var(--muted);font-size:13px}
+.meta-row span b{color:var(--ink)}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:18px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 6px;font-size:18px}
+.card .lead{color:var(--muted);margin:0 0 14px}
+.card h4{margin:18px 0 6px;font-size:15px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;font-weight:700}
+ul{padding-left:20px;margin:8px 0}li{margin:4px 0}
+.modulehead{display:flex;align-items:center;gap:14px;margin:32px 0 12px}
+.modulehead .num{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--hr),var(--accent));display:grid;place-items:center;font-weight:800;font-size:20px;color:#fff}
+.modulehead h2{margin:0;font-size:22px}
+.modulehead small{display:block;color:var(--muted);font-size:12px;letter-spacing:1px;text-transform:uppercase}
+.activity{border:1px solid var(--border);border-radius:12px;padding:18px;margin:14px 0;background:var(--panel)}
+.activity .head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:10px}
+.activity .num{background:var(--accent);color:#fff;font-weight:800;font-size:12px;padding:3px 9px;border-radius:6px}
+.activity .time{color:var(--muted);font-size:12px}
+.activity .file{font-size:12px;color:var(--accent2);background:var(--badge-bg);border:1px solid var(--border);padding:3px 9px;border-radius:6px}
+.activity h4{margin:0;font-size:16px;color:var(--ink);font-weight:600}
+.activity p{margin:6px 0;color:var(--muted);font-size:14px}
+.task-step{background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--accent2);border-radius:8px;padding:12px 14px;margin:10px 0}
+.task-step .step-label{font-size:11px;letter-spacing:1px;color:var(--accent2);text-transform:uppercase;font-weight:700;margin-bottom:4px}
+.task-step .tool-badge{display:inline-block;background:rgba(5,150,105,.2);border:1px solid var(--accent);color:var(--accent2);font-size:11px;padding:2px 8px;border-radius:5px;margin-left:8px;vertical-align:middle}
+.prompt{position:relative;background:var(--code);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:14px 44px 14px 16px;margin:10px 0;font-family:"JetBrains Mono","Consolas",monospace;font-size:13px;color:#c9d6ff;white-space:pre-wrap;line-height:1.6}
+.prompt .copy{position:absolute;top:8px;right:8px;background:#1a2552;color:#e2e8f0;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:inherit;transition:all .2s}
+.prompt .copy:hover{background:var(--accent);color:#fff}
+.prompt .copy.copied{background:var(--good);color:#0a0f24}
+.callout{border-left:4px solid var(--accent2);background:var(--callout-info);padding:12px 16px;margin:12px 0;border-radius:8px;color:var(--ink);font-size:14px}
+.callout.warn{border-color:var(--warn);background:var(--callout-warn)}
+.callout.danger{border-color:var(--danger);background:var(--callout-bad)}
+.callout.good{border-color:var(--good);background:var(--callout-good)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:var(--accent2);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.8px}
+.agenda{display:grid;grid-template-columns:90px 1fr 100px;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.agenda>div{padding:10px 14px;border-bottom:1px solid var(--border)}
+.agenda>div:nth-child(3n+1){color:var(--accent2);font-weight:700;background:var(--panel)}
+.agenda>div:nth-child(3n+3){color:var(--muted);text-align:right}
+.agenda>div:nth-last-child(-n+3){border-bottom:0}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:14px}
+.tool-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px}
+.tool-card .icon{font-size:22px;margin-bottom:6px}
+.tool-card h5{margin:0 0 4px;font-size:14px;color:var(--ink)}
+.tool-card p{margin:0;font-size:12px;color:var(--muted);line-height:1.5}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;letter-spacing:.5px}
+.badge.blue{background:rgba(5,150,105,.2);color:var(--accent2);border:1px solid var(--accent)}
+.badge.green{background:rgba(34,197,94,.15);color:var(--good);border:1px solid var(--good)}
+.badge.yellow{background:rgba(245,158,11,.15);color:var(--warn);border:1px solid var(--warn)}
+.badge.red{background:rgba(239,68,68,.15);color:var(--danger);border:1px solid var(--danger)}
+.act-header{background:linear-gradient(90deg,var(--sidebar-a),transparent);border-left:4px solid var(--hr);border-radius:8px;padding:12px 16px;margin:22px 0 8px;display:flex;align-items:center;gap:12px}
+.act-header .act-num{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent2);font-weight:700}
+.act-header h3{margin:0;font-size:18px;color:var(--ink)}
+.act-header .act-sub{font-size:12px;color:var(--muted)}
+.file-chip{display:inline-block;background:var(--badge-bg);border:1px solid var(--border);color:var(--accent2);font-size:12px;padding:4px 10px;border-radius:6px;margin:3px 2px}
+.file-chip a{color:inherit}
+@media(max-width:760px){
+  .layout{grid-template-columns:1fr}
+  aside{position:static;height:auto}
+  main{padding:16px 18px 60px}
+  .hero h2{font-size:22px}
+}
+</style>
+</head>
+<body>
+<div class="layout" id="main">
+<!-- SIDEBAR -->
+<aside>
+  <div class="brand">
+    <div class="logo">HR</div>
+    <h1>M365 Copilot<br>HR Immersion</h1>
+  </div>
+  <div class="tag">Contoso Malaysia · Half-Day · 3.5 hrs</div>
+  <nav>
+    <h3>Overview</h3>
+    <a href="#overview">About this session</a>
+    <a href="#agenda">Agenda</a>
+    <a href="#story">The Story</a>
+    <a href="#tools">Tools available</a>
+    <h3>Get Started</h3>
+    <a href="#getstarted">&#128272; Open Copilot Chat</a>
+    <h3>Act 1 — The HR Chaos</h3>
+    <a href="#ex1">Ex 1 · HR Policy Q&amp;A</a>
+    <a href="#ex2">Ex 2 · CV-JD Screening</a>
+    <h3>Act 2 — The HR Unlock</h3>
+    <a href="#ex3">Ex 3 · Interview Questions</a>
+    <a href="#ex4">Ex 4 · Salary Research</a>
+    <a href="#ex5">Ex 5 · Employer Branding</a>
+    <h3>Act 3 — The HR Future</h3>
+    <a href="#ex6">Ex 6 · Learning Journeys</a>
+    <a href="#ex7">Ex 7 · Benefits Analysis</a>
+    <a href="#ex8">Ex 8 · Disciplinary Cases</a>
+    <a href="#ex9">Ex 9 · IR Court Research</a>
+    <h3>Resources</h3>
+    <a href="#files">Sample files</a>
+    <a href="#tips">Tips &amp; quick prompts</a>
+  </nav>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main>
+
+<!-- HERO -->
+<section id="overview">
+<div class="hero">
+  <div class="pill">M365 COPILOT · HR IMMERSION · MALAYSIA</div>
+  <h2>Contoso Malaysia · AI-Powered HR with Copilot Chat</h2>
+  <p>A hands-on immersion for HR Strategy, Talent Acquisition, Learning &amp; Development, Compensation &amp; Benefits, and Employee Relations leaders across Contoso Malaysia — grounded in Malaysian employment law &amp; government policy.</p>
+  <div class="meta-row">
+    <span><b>Duration</b> 3.5 hours (Half-Day)</span>
+    <span><b>Format</b> Demo + Guided hands-on</span>
+    <span><b>Tool</b> Microsoft 365 Copilot Chat</span>
+    <span><b>Compliance</b> EA 1955 · IRA 1967 · EPF · SOCSO · HRD Corp</span>
+  </div>
+</div>
+
+<div class="card">
+  <h3>About this workshop</h3>
+  <p class="lead">9 AI-powered HR scenarios covering 5 functional domains — Self-Service, Recruitment, L&amp;D, Compensation, and Industrial Relations. All grounded in Malaysian employment law and government policy.</p>
+  <h4>What you will leave with</h4>
+  <ul>
+    <li>Experience using Copilot Chat with HR documents to answer policy questions per EA 1955 (2022 amendments)</li>
+    <li>A working CV screening and interview question framework aligned with non-discriminatory hiring (S.60L)</li>
+    <li>Salary benchmarks referencing Minimum Wages Order 2024 (RM1,700) and Malaysian market surveys</li>
+    <li>Bilingual employer branding content (BM &amp; English) aligned with MADANI economy values</li>
+    <li>Learning pathways optimised for HRD Corp levy utilisation and SKM certification</li>
+    <li>Benefits analysis benchmarked against EPF/SOCSO/EIS statutory requirements</li>
+    <li>Disciplinary case insights and IR Court award research using Copilot Chat web search</li>
+  </ul>
+  <h4>What this workshop is not</h4>
+  <ul>
+    <li>It is <b>not</b> a feature walkthrough: every use case is demonstrated in a Malaysian HR context</li>
+    <li>It is <b>not</b> legal advice: Copilot drafts and researches, your HR team and legal counsel decide</li>
+    <li>It is <b>not</b> connected to live Contoso systems: all data used is sample/anonymised</li>
+  </ul>
+  <div class="callout warn" style="margin-top:14px">
+    <b>Tool scope for this session:</b> &#9989; Copilot Chat (Work) with file attachments and web search. Analyst, Agent Builder, Excel/Word Copilot agents are <b>not</b> required or available for this session.
+  </div>
+</div>
+</section>
+
+<!-- AGENDA -->
+<section id="agenda">
+<div class="modulehead"><div class="num">&#128203;</div><h2>Agenda<small>3 Acts · 9 Scenarios · 3.5 Hours</small></h2></div>
+<div class="card">
+<div class="agenda">
+  <div>0:00–0:05</div><div><b>Opening &amp; Context</b> — Frame the YH shortlist: 9 scenarios across 5 HR domains</div><div>5 min</div>
+  <div>0:05–0:25</div><div><b>①</b> HR Policy Q&amp;A with Copilot Chat <span class="badge blue">HR Director</span></div><div>20 min</div>
+  <div>0:25–0:45</div><div><b>②</b> CV-JD Screening &amp; Matching <span class="badge blue">Talent Acquisition</span></div><div>20 min</div>
+  <div>0:45–0:50</div><div><b>☕ Break + Q&amp;A</b></div><div>5 min</div>
+  <div>0:50–1:10</div><div><b>③</b> Interview Questions Generator <span class="badge blue">HR Business Partner</span></div><div>20 min</div>
+  <div>1:10–1:30</div><div><b>④</b> Market Salary Research <span class="badge blue">Compensation Specialist</span></div><div>20 min</div>
+  <div>1:30–1:50</div><div><b>⑤</b> Employer Branding Content <span class="badge blue">Talent Acquisition</span></div><div>20 min</div>
+  <div>1:50–1:55</div><div><b>☕ Break + Q&amp;A</b></div><div>5 min</div>
+  <div>1:55–2:20</div><div><b>⑥</b> Personalized Learning Journeys <span class="badge blue">L&amp;D Manager</span></div><div>25 min</div>
+  <div>2:20–2:45</div><div><b>⑦</b> Benefits &amp; Compensation Analysis <span class="badge blue">Compensation Manager</span></div><div>25 min</div>
+  <div>2:45–3:10</div><div><b>⑧</b> Disciplinary Case Analysis <span class="badge blue">IR Manager</span></div><div>25 min</div>
+  <div>3:10–3:30</div><div><b>⑨</b> IR Court Award Research <span class="badge blue">IR Specialist</span></div><div>20 min</div>
+  <div>3:25–3:30</div><div><b>Wrap-Up &amp; Next Steps</b></div><div>5 min</div>
+</div>
+<div class="callout" style="margin-top:14px">
+  <b>Hands-on starts after the presenter demo:</b> open this page when the facilitator says "Your turn — follow the exercise."
+</div>
+</div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+<div class="modulehead" style="margin-top:8px">
+  <div class="num" style="font-size:14px">&#9654;</div>
+  <h2>The Story<small>One HR half-day. Five domains. Nine moments.</small></h2>
+</div>
+
+<div style="display:grid;grid-template-columns:220px 1fr;gap:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:24px">
+  <!-- LEFT PANEL -->
+  <div style="background:linear-gradient(180deg,var(--sidebar-a),var(--sidebar-b));padding:24px 18px;display:flex;flex-direction:column;gap:11px">
+    <p style="margin:0;font-size:8px;letter-spacing:2px;font-weight:700;color:#34d399;text-transform:uppercase">Copilot Chat for HR</p>
+    <h3 style="margin:0;font-size:19px;font-weight:800;color:#fff;line-height:1.2">From HR Admin<br>to HR Advisor</h3>
+    <div style="margin-top:4px">
+      <p style="margin:0 0 3px;font-size:7.5px;letter-spacing:1.5px;font-weight:700;color:#34d399;text-transform:uppercase">Persona</p>
+      <p style="margin:0;font-size:12.5px;font-weight:700;color:#fff">Puan Aisha Hassan</p>
+      <p style="margin:2px 0 0;font-size:10.5px;color:#94a3b8">Group HR Director<br>Contoso Malaysia</p>
+    </div>
+    <div style="margin-top:4px">
+      <p style="margin:0 0 3px;font-size:7.5px;letter-spacing:1.5px;font-weight:700;color:#34d399;text-transform:uppercase">The Mission</p>
+      <p style="margin:0;font-size:10.5px;color:#cbd5e1;line-height:1.6">One HR half-day to fix: a policy backlog, a talent pipeline, a training budget, a pay gap, and a disciplinary risk — all before the CHRO review at 4PM.</p>
+    </div>
+    <div style="margin-top:4px;padding:10px;background:rgba(255,255,255,.06);border-radius:8px;border:1px solid rgba(255,255,255,.1)">
+      <p style="margin:0 0 3px;font-size:7.5px;letter-spacing:1.5px;font-weight:700;color:#34d399;text-transform:uppercase">The Punchline</p>
+      <p style="margin:0;font-size:11.5px;font-weight:700;font-style:italic;color:#fff;line-height:1.4">One half-day. Five domains.<br>From chaos to CHRO-ready.</p>
+    </div>
+    <div style="margin-top:6px;border-top:1px solid rgba(255,255,255,.1);padding-top:10px">
+      <p style="margin:0 0 6px;font-size:7.5px;letter-spacing:1.5px;font-weight:700;color:#34d399;text-transform:uppercase">Session Plan</p>
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#94a3b8"><span>Act 1: Policy &amp; Recruitment</span><span style="color:#e2e8f0;font-weight:600">45 min</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#94a3b8"><span>Act 2: Comp &amp; Branding</span><span style="color:#e2e8f0;font-weight:600">60 min</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#94a3b8"><span>Act 3: L&amp;D, Benefits, IR</span><span style="color:#e2e8f0;font-weight:600">95 min</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;border-top:1px solid rgba(255,255,255,.1);padding-top:5px;margin-top:2px"><span style="color:#94a3b8">Breaks + Q&amp;A</span><span style="color:#34d399;font-weight:700">10 min</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700"><span style="color:#fff">Total</span><span style="color:#34d399">3.5 hrs</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div style="background:var(--panel);padding:20px 18px 14px">
+    <h3 style="margin:0 0 14px;font-size:16px;font-weight:700;color:var(--ink)">Nine moments across one HR half-day</h3>
+
+    <div style="margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
+        <span style="background:#064e3b;color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.5px">ACT 1 &nbsp;&#183;&nbsp; THE HR CHAOS</span>
+        <span style="font-size:12px;font-weight:700;color:var(--ink)">Policy &amp; Recruitment</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+        <div style="border:1px solid var(--border);border-radius:7px;overflow:hidden">
+          <div style="background:#0f766e;padding:4px 8px;display:flex;align-items:center;gap:5px">
+            <span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.55)">01</span>
+            <span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">Copilot Chat + Docs</span>
+          </div>
+          <div style="padding:8px;background:var(--panel2)">
+            <p style="margin:0 0 2px;font-size:11px;font-weight:700;color:var(--ink)">HR Policy Q&amp;A</p>
+            <p style="margin:0;font-size:9.5px;color:var(--muted);line-height:1.5">Attach Employee Handbook. Instant answers on EA 1955: maternity 98 days, paternity 7 days, FWA S.60P.</p>
+          </div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:7px;overflow:hidden">
+          <div style="background:#065f46;padding:4px 8px;display:flex;align-items:center;gap:5px">
+            <span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.55)">02</span>
+            <span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">Copilot Chat + Docs</span>
+          </div>
+          <div style="padding:8px;background:var(--panel2)">
+            <p style="margin:0 0 2px;font-size:11px;font-weight:700;color:var(--ink)">CV-JD Screening</p>
+            <p style="margin:0;font-size:9.5px;color:var(--muted);line-height:1.5">Screen 3 CVs vs 1 JD. Non-discriminatory per EA 1955 S.60L. From 45 mins to 10 mins per CV.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
+        <span style="background:#064e3b;color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.5px">ACT 2 &nbsp;&#183;&nbsp; THE HR UNLOCK</span>
+        <span style="font-size:12px;font-weight:700;color:var(--ink)">Compensation &amp; Branding</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+        <div style="border:1px solid var(--border);border-radius:7px;overflow:hidden">
+          <div style="background:#047857;padding:4px 8px;display:flex;align-items:center;gap:5px">
+            <span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.55)">03</span>
+            <span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">Copilot Chat</span>
+          </div>
+          <div style="padding:8px;background:var(--panel2)">
+            <p style="margin:0 0 2px;font-size:11px;font-weight:700;color:var(--ink)">Interview Questions</p>
+            <p style="margin:0;font-size:9.5px;color:var(--muted);line-height:1.5">STAR + technical + situational. MEF best practices. 2 hrs to 5 mins.</p>
+          </div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:7px;overflow:hidden">
+          <div style="background:#065f46;padding:4px 8px;display:flex;align-items:center;gap:5px">
+            <span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.55)">04</span>
+            <span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">Copilot Chat Web</span>
+          </div>
+          <div style="padding:8px;background:var(--panel2)">
+            <p style="margin:0 0 2px;font-size:11px;font-weight:700;color:var(--ink)">Salary Research</p>
+            <p style="margin:0;font-size:9.5px;color:var(--muted);line-height:1.5">Live web benchmarks. Min Wages RM1,700 (Feb 2025). TalentCorp, Hays, Kelly surveys.</p>
+          </div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:7px;overflow:hidden">
+          <div style="background:#0f766e;padding:4px 8px;display:flex;align-items:center;gap:5px">
+            <span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.55)">05</span>
+            <span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">Copilot Chat</span>
+          </div>
+          <div style="padding:8px;background:var(--panel2)">
+            <p style="margin:0 0 2px;font-size:11px;font-weight:700;color:var(--ink)">Employer Branding</p>
+            <p style="margin:0;font-size:9.5px;color:var(--muted);line-height:1.5">LinkedIn + EVP + careers page. Bilingual BM &amp; English. MADANI aligned.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:14px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
+        <span style="background:#064e3b;color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.5px">ACT 3 &nbsp;&#183;&nbsp; THE HR FUTURE</span>
+        <span style="font-size:12px;font-weight:700;color:var(--ink)">L&amp;D, Benefits &amp; Industrial Relations</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+        <div style="border:1px solid var(--border);border-radius:7px;overflow:hidden">
+          <div style="background:#047857;padding:4px 8px;display:flex;align-items:center;gap:5px">
+            <span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.55)">06</span>
+            <span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">Copilot Chat + Files</span>
+          </div>
+          <div style="padding:8px;background:var(--panel2)">
+            <p style="margin:0 0 2px;font-size:11px;font-weight:700;color:var(--ink)">Learning Journeys</p>
+            <p style="margin:0;font-size:9.5px;color:var(--muted);line-height:1.5">SKM + HRD Corp levy optimization. NOSS competency mapping.</p>
+          </div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:7px;overflow:hidden">
+          <div style="background:#065f46;padding:4px 8px;display:flex;align-items:center;gap:5px">
+            <span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.55)">07</span>
+            <span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">Copilot Chat + Files</span>
+          </div>
+          <div style="padding:8px;background:var(--panel2)">
+            <p style="margin:0 0 2px;font-size:11px;font-weight:700;color:var(--ink)">Benefits Analysis</p>
+            <p style="margin:0;font-size:9.5px;color:var(--muted);line-height:1.5">EPF/SOCSO/EIS compliance. RM6,000 SOCSO ceiling (Oct 2024). MEF benchmarks.</p>
+          </div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:7px;overflow:hidden">
+          <div style="background:#0f766e;padding:4px 8px;display:flex;align-items:center;gap:5px">
+            <span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.55)">08</span>
+            <span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">Copilot Chat + Files</span>
+          </div>
+          <div style="padding:8px;background:var(--panel2)">
+            <p style="margin:0 0 2px;font-size:11px;font-weight:700;color:var(--ink)">Disciplinary Cases</p>
+            <p style="margin:0;font-size:9.5px;color:var(--muted);line-height:1.5">IRA 1967 compliance. DI procedures. S.20 unfair dismissal risk flags.</p>
+          </div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:7px;overflow:hidden">
+          <div style="background:#047857;padding:4px 8px;display:flex;align-items:center;gap:5px">
+            <span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.55)">09</span>
+            <span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">Copilot Chat Web</span>
+          </div>
+          <div style="padding:8px;background:var(--panel2)">
+            <p style="margin:0 0 2px;font-size:11px;font-weight:700;color:var(--ink)">IR Court Research</p>
+            <p style="margin:0;font-size:9.5px;color:var(--muted);line-height:1.5">Mahkamah Perusahaan awards. Max 24-month backwages. DI procedural failures.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+<div class="modulehead"><div class="num">&#128295;</div><h2>Tools Available Today<small>Copilot Chat surfaces only</small></h2></div>
+<div class="card">
+<div class="tools-grid">
+  <div class="tool-card"><div class="icon">&#9729;&#65039;</div><h5>Copilot Chat (Work)</h5><p>Primary interface for all 9 scenarios. Available to all participants. Supports file attachments, web search, and multi-turn conversations.</p></div>
+  <div class="tool-card"><div class="icon">&#128196;</div><h5>File Attachments</h5><p>Attach up to 10 files per conversation. Supports .docx, .xlsx, .pdf, .txt. Copilot reads and reasons over your HR documents.</p></div>
+  <div class="tool-card"><div class="icon">&#127760;</div><h5>Web Search (Built-in)</h5><p>Copilot Chat includes live web search. No separate Researcher tool needed. Ask salary benchmarks, court awards, or policy updates.</p></div>
+  <div class="tool-card"><div class="icon">&#128172;</div><h5>Multi-turn Follow-up</h5><p>Continue in the same chat to drill down, modify, or extend any response. Each exercise builds on the previous prompt.</p></div>
+</div>
+<div class="callout danger" style="margin-top:16px">
+  <b>Not available in this session:</b> Analyst Agent, Agent Builder, Excel/Word/PPT Copilot agents, and Cowork require Frontier program enrollment or additional licenses. All exercises are designed for <b>Copilot Chat only</b>.
+</div>
+<div class="callout warn" style="margin-top:10px">
+  <b>Data privacy reminder:</b> Do not paste real employee identifiable information, salary data, or commercially sensitive HR data into Copilot. Use the sample files provided. Your M365 Copilot prompts and data stay within your Microsoft 365 tenant and are not used to train AI models.
+</div>
+</div>
+</section>
+
+<!-- GET STARTED -->
+<section id="getstarted">
+<div class="modulehead"><div class="num">&#128272;</div><h2>Get Started<small>Open Copilot Chat before the first exercise</small></h2></div>
+<div class="card">
+  <h4>Step 1 — Open Copilot Chat</h4>
+  <p>Go to <a href="https://microsoft365.com/chat" target="_blank">microsoft365.com/chat</a> and sign in with your work account. Or press the Copilot icon in Microsoft Teams.</p>
+  <h4>Step 2 — Check you are in Work mode</h4>
+  <p>Ensure the chat shows <b>"Work"</b> tab (not "Web"). Work mode is grounded on your organisation's tenant. Files you attach stay within your tenant.</p>
+  <h4>Step 3 — Download the sample files</h4>
+  <p>Download the sample HR documents from the <a href="#files">Sample files</a> section below. You will attach these to Copilot Chat during the exercises.</p>
+  <div class="callout good">
+    <b>Ready when:</b> You can see the Copilot Chat interface and the "Attach files" button. The first exercise requires attaching HR policy documents.
+  </div>
+</div>
+</section>
+
+<!-- ===== EXERCISE 1 ===== -->
+<section id="ex1">
+<div class="act-header">
+  <div>
+    <div class="act-num">ACT 1 — THE HR CHAOS</div>
+    <h3>HR Policy &amp; Recruitment</h3>
+  </div>
+  <div class="act-sub">0:05 – 0:45 · 40 min · Scenarios ① &amp; ②</div>
+</div>
+
+<div class="activity">
+  <div class="head">
+    <span class="num">EXERCISE 1</span>
+    <span class="time">0:05 – 0:25 · 20 min</span>
+    <span class="file">&#128196; Employee_Handbook.docx + Leave_Policy.docx + Benefits_Guide.docx</span>
+    <span class="badge blue">HR Director</span>
+  </div>
+  <h4>HR Policy Q&amp;A with Copilot Chat</h4>
+  <p><b>Goal:</b> Use Copilot Chat with attached HR documents to answer employee policy questions per Employment Act 1955 (2022 amendments). Eliminate manual HR calls with instant self-service.</p>
+  <p><b>Wow moment:</b> Manual HR calls → Instant self-service. 30-minute wait → 30-second answer.</p>
+
+  <div class="task-step">
+    <div class="step-label">Task 1 — Answer policy questions <span class="tool-badge">&#9729;&#65039; Copilot Chat (Work)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Open Copilot Chat. Attach Employee_Handbook.docx and Leave_Policy.docx. Then use this prompt:</p>
+    <div class="prompt">I've attached our Employee Handbook and Leave Policy. Please answer per Employment Act 1955 (2022 amendments):
+(1) Maternity leave entitlement (EA 1955: 98 days)
+(2) Paternity leave (EA 1955: 7 days)
+(3) How to apply for Flexible Working Arrangement under S.60P?
+(4) What is the maximum working hours (EA 1955: 45 hrs/week)?<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 2 — Drill down on statutory benefits <span class="tool-badge">&#9729;&#65039; Copilot Chat (Work)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation (do NOT start a new chat). Attach Benefits_Guide.docx and ask:</p>
+    <div class="prompt">Based on the Benefits Guide, explain Malaysian statutory requirements:
+(1) EPF contribution rates — employer 13%/12%, employee 11%
+(2) SOCSO new ceiling RM6,000 (effective October 2024)
+(3) EIS 0.2% contribution — verified?
+(4) Minimum wage compliance RM1,700 (effective February 2025)
+Are we above or below each statutory minimum?<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 3 — Create employee FAQ <span class="tool-badge">&#9729;&#65039; Copilot Chat (Work)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Create an Employee FAQ covering Malaysian employment law — top 20 questions on:
+- EA 1955 leave entitlements (annual, sick, maternity, paternity)
+- EPF/SOCSO/EIS contributions and when deductions apply
+- Flexible Working Arrangement procedures (S.60P)
+- Notice periods (S.12) and overtime rates (S.60A: 1.5× normal rate)
+Format as Q&A with short plain-language answers suitable for employees.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+</div>
+</section>
+
+<!-- ===== EXERCISE 2 ===== -->
+<section id="ex2">
+<div class="activity">
+  <div class="head">
+    <span class="num">EXERCISE 2</span>
+    <span class="time">0:25 – 0:45 · 20 min</span>
+    <span class="file">&#128196; Sample_CV_1.docx + Sample_CV_2.docx + Sample_CV_3.docx + Job_Description.docx</span>
+    <span class="badge blue">Talent Acquisition</span>
+  </div>
+  <h4>CV-JD Screening &amp; Matching</h4>
+  <p><b>Goal:</b> Screen CVs against a Job Description ensuring non-discriminatory practices per EA 1955 S.60L (no discrimination based on pregnancy, gender, religion, or marital status).</p>
+  <p><b>Wow moment:</b> 45 mins/CV manual review → 10 mins for all 3 CVs with instant scoring and interview questions.</p>
+
+  <div class="task-step">
+    <div class="step-label">Task 1 — Screen CVs against JD <span class="tool-badge">&#9729;&#65039; Copilot Chat (Work)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Start a new Copilot Chat. Attach all 3 CVs and the Job_Description.docx. Use this prompt:</p>
+    <div class="prompt">Compare these 3 CVs against this Job Description. Per EA 1955 S.60L fair hiring:
+(1) Assess skills and qualifications only — no age/gender/marital bias
+(2) Verify Malaysian qualifications (MQA accredited institutions)
+(3) Score alignment with JD requirements: 1–10
+(4) Recommend suitability without discriminatory criteria
+Provide a summary for each candidate.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 2 — Generate unique interview questions per candidate <span class="tool-badge">&#9729;&#65039; Copilot Chat (Work)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Generate 3 unique interview questions for each candidate — targeting their specific gaps identified in the screening.
+
+IMPORTANT: Avoid EA 1955 S.60L prohibited topics. Do NOT ask about:
+- Pregnancy plans or family planning
+- Marital status or number of children
+- Ethnicity, religion, or nationality beyond work eligibility
+Focus on: skills verification, experience depth, and technical competency.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 3 — Create comparison matrix <span class="tool-badge">&#9729;&#65039; Copilot Chat (Work)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Create a comparison matrix compliant with Malaysian fair hiring practices:
+
+Columns: Candidate Name | MQA Qualification | Skills Match % | Experience Fit | JD Alignment Score | Recommendation
+
+Note: Matrix must NOT include columns for age, gender, marital status, or personal status — EA 1955 S.60L compliance required.
+
+Format as a clear table ready for the hiring panel.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+</div>
+</section>
+
+<!-- ===== ACT 2 HEADER ===== -->
+<section id="ex3">
+<div class="act-header">
+  <div>
+    <div class="act-num">ACT 2 — THE HR UNLOCK</div>
+    <h3>Compensation &amp; Employer Branding</h3>
+  </div>
+  <div class="act-sub">0:50 – 1:50 · 60 min · Scenarios ③ ④ ⑤</div>
+</div>
+
+<div class="activity">
+  <div class="head">
+    <span class="num">EXERCISE 3</span>
+    <span class="time">0:50 – 1:10 · 20 min</span>
+    <span class="file">&#128196; Job_Description.docx</span>
+    <span class="badge blue">HR Business Partner</span>
+  </div>
+  <h4>Interview Questions Generator</h4>
+  <p><b>Goal:</b> Generate a structured interview question bank per MEF (Malaysian Employers Federation) best practices, avoiding EA 1955 S.60L prohibited questions.</p>
+  <p><b>Wow moment:</b> 2 hours to prepare interview questions → 5 minutes with a complete scoring guide.</p>
+
+  <div class="task-step">
+    <div class="step-label">Task 1 — Generate question bank <span class="tool-badge">&#9729;&#65039; Copilot Chat</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Start a new Copilot Chat. Attach the Job_Description.docx. Use this prompt:</p>
+    <div class="prompt">Generate an interview question bank for [Role] per MEF best practices:
+(1) 5 behavioral STAR-format questions (Situation, Task, Action, Result)
+(2) 5 technical competency questions aligned with the JD
+(3) 3 situational judgement questions
+
+IMPORTANT: Avoid EA 1955 S.60L prohibited topics — no questions on pregnancy, marital status, number of children, religion, or ethnicity.
+
+Include a scoring rubric (1–5 scale) per Malaysian competency standards.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 2 — Create scoring guide <span class="tool-badge">&#9729;&#65039; Copilot Chat</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Create a detailed scoring guide per Malaysian competency framework. For each question:
+- What does a score of 1 look like? (Unsatisfactory)
+- What does a score of 3 look like? (Meets expectations)
+- What does a score of 5 look like? (Exceptional)
+
+Reference NOSS (National Occupational Skills Standard) competency levels where applicable.
+Format as a table for consistent panel evaluation.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 3 — Adapt for different seniority levels <span class="tool-badge">&#9729;&#65039; Copilot Chat</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Adapt these questions for two Malaysian job grades:
+
+(1) Junior Executive — MQA Level 6 (Bachelor's Degree) — 0–2 years experience
+(2) Senior Manager — MQA Level 7 (Master's or equivalent) — 8+ years experience
+
+Align complexity with Malaysian Qualifications Framework (MQF) levels.
+Show how question depth and expected answers should differ by seniority.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+</div>
+</section>
+
+<!-- ===== EXERCISE 4 ===== -->
+<section id="ex4">
+<div class="activity">
+  <div class="head">
+    <span class="num">EXERCISE 4</span>
+    <span class="time">1:10 – 1:30 · 20 min</span>
+    <span class="file">&#127760; Web search — no file needed</span>
+    <span class="badge blue">Compensation Specialist</span>
+  </div>
+  <h4>Market Salary Research</h4>
+  <p><b>Goal:</b> Research Malaysian salary benchmarks referencing Minimum Wages Order 2024 (RM1,700/month effective Feb 2025), TalentCorp, Hays Malaysia, and Kelly Services surveys.</p>
+  <p><b>Wow moment:</b> 4–6 hours per benchmarking exercise → 30 minutes with live web search and citations.</p>
+
+  <div class="task-step">
+    <div class="step-label">Task 1 — Research market salary rates <span class="tool-badge">&#9729;&#65039; Copilot Chat (Web search)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Start a new Copilot Chat. No file attachment needed — Copilot Chat will search the web:</p>
+    <div class="prompt">Search the web for salary benchmarks for Senior HR Manager in Malaysia / Klang Valley (2024–2025). Include:
+(1) Market median, P25, and P75 salary ranges in RM
+(2) Verify compliance with Minimum Wages Order 2024 baseline: RM1,700/month (effective Feb 2025)
+   - Note: For employers with fewer than 5 employees, RM1,500 applies until Aug 2025
+(3) Reference TalentCorp Malaysia, Hays Malaysia, Kelly Services, and JobStreet surveys
+(4) Provide source citations for all data points<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 2 — Compare across Malaysian industries <span class="tool-badge">&#9729;&#65039; Copilot Chat (Web search)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Compare salary ranges for HR roles across these Malaysian industry segments:
+(1) Oil &amp; Gas (PETRONAS ecosystem)
+(2) Automotive (DRB-HICOM group)
+(3) Port Operations (MMC Ports, Northport, Westports)
+(4) Plantation (Sime Darby, FGV Holdings)
+(5) Property &amp; Construction
+
+What premium do GLC companies pay vs MNCs vs SMEs in Malaysia?
+Include typical bonus structure and benefits differences.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 3 — Create benchmark report <span class="tool-badge">&#9729;&#65039; Copilot Chat</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Create a Malaysia-specific salary benchmark report for management presentation. Include:
+(1) Executive Summary (2–3 sentences)
+(2) Market data vs Minimum Wages Order 2024 compliance check
+(3) Total cost-to-company calculation including EPF (13%), SOCSO, EIS (0.2%)
+(4) Regional comparison: Malaysia vs Singapore vs Indonesia for talent competitiveness
+(5) Recommendation: is our current pay range competitive?
+
+Format as a professional report with clear sections.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+</div>
+</section>
+
+<!-- ===== EXERCISE 5 ===== -->
+<section id="ex5">
+<div class="activity">
+  <div class="head">
+    <span class="num">EXERCISE 5</span>
+    <span class="time">1:30 – 1:50 · 20 min</span>
+    <span class="file">&#9729;&#65039; No file needed — Copilot Chat generates</span>
+    <span class="badge blue">Talent Acquisition</span>
+  </div>
+  <h4>Employer Branding Content</h4>
+  <p><b>Goal:</b> Create employer branding content aligned with Malaysian talent market, MADANI economy values, and 12th Malaysia Plan workforce priorities — bilingual BM &amp; English.</p>
+  <p><b>Wow moment:</b> 1 hour per content piece → 10 minutes with professional bilingual content.</p>
+
+  <div class="task-step">
+    <div class="step-label">Task 1 — Create LinkedIn job post <span class="tool-badge">&#9729;&#65039; Copilot Chat</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Start a new Copilot Chat. No file needed:</p>
+    <div class="prompt">Write a LinkedIn job post for Process Engineer at Contoso Malaysia. Include:
+(1) Hook referencing Malaysia's energy transition and green economy goals
+(2) Competitive salary — above Minimum Wages Order 2024 (RM1,700/month)
+(3) Benefits package: maternity 98 days, paternity 7 days, EPF employer contribution 15%
+(4) Flexible Working Arrangement options per EA 1955 S.60P
+(5) Career growth within a diversified GLC group
+
+Format bilingual — Bahasa Malaysia paragraph followed by English paragraph.
+Keep tone: professional, modern, aspirational.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 2 — Write Employee Value Proposition <span class="tool-badge">&#9729;&#65039; Copilot Chat</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Create an Employee Value Proposition (EVP) statement for Contoso Malaysia to attract Malaysian talent. Highlight:
+(1) Alignment with MADANI values — sustainability, integrity, shared prosperity
+(2) Support for 12th Malaysia Plan workforce development priorities
+(3) Investment in HRD Corp-claimable training programs
+(4) Merit-based career progression for all Malaysians — Bumiputera and non-Bumiputera
+(5) Group-wide exposure: Automotive, Ports, Plantation, Energy, Property
+
+Length: 150–200 words. Tone: authentic, inclusive, forward-looking.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 3 — Draft careers page "Why Join Us" <span class="tool-badge">&#9729;&#65039; Copilot Chat</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Write bilingual "Mengapa Sertai Kami / Why Join Us" content for Contoso Malaysia's careers website:
+
+Section 1 — Our Mission (MADANI-aligned)
+Section 2 — Malaysian-centric benefits: EPF 15% employer, extended maternity/paternity, Hari Raya/Deepavali/CNY bonuses, medical panel
+Section 3 — Growth: HRD Corp training investment, SKM certification support, GLC ecosystem exposure
+
+Deliver as:
+- 500 words in Bahasa Malaysia
+- 500 words in English
+
+Style: warm, professional, inclusive.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+</div>
+</section>
+
+<!-- ===== ACT 3 HEADER ===== -->
+<section id="ex6">
+<div class="act-header">
+  <div>
+    <div class="act-num">ACT 3 — THE HR FUTURE</div>
+    <h3>L&amp;D, Benefits &amp; Industrial Relations</h3>
+  </div>
+  <div class="act-sub">1:55 – 3:30 · 95 min · Scenarios ⑥ ⑦ ⑧ ⑨</div>
+</div>
+
+<div class="activity">
+  <div class="head">
+    <span class="num">EXERCISE 6</span>
+    <span class="time">1:55 – 2:20 · 25 min</span>
+    <span class="file">&#128196; Employee_Skills.xlsx + Training_Content_Inventory.xlsx</span>
+    <span class="badge blue">L&amp;D Manager</span>
+  </div>
+  <h4>Personalised Learning Journeys</h4>
+  <p><b>Goal:</b> Map employee skills and create personalised learning pathways aligned with HRD Corp levy utilisation and Malaysian Skills Certificate (SKM) framework.</p>
+  <p><b>Wow moment:</b> High admin effort to build training plans → Automated skill mapping and levy optimisation with Copilot Chat + files.</p>
+
+  <div class="task-step">
+    <div class="step-label">Task 1 — Map individual skills against SKM framework <span class="tool-badge">&#9729;&#65039; Copilot Chat (Work)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Start a new Copilot Chat. Attach Employee_Skills.xlsx. Use this prompt:</p>
+    <div class="prompt">I've attached the employee skills data file. Please:
+(1) Map each micro-skill against the SKM (Sijil Kemahiran Malaysia) framework levels
+(2) Identify skill gaps vs NOSS (National Occupational Skills Standard) requirements
+(3) Classify skills per DSD (Department of Skills Development) competency levels 1–5
+(4) Flag which skill gaps are eligible for HRD Corp levy claims
+(5) Prioritise gaps by business impact: Critical / Important / Nice-to-have<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 2 — Match training content to gaps <span class="tool-badge">&#9729;&#65039; Copilot Chat (Work)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the conversation. Attach Training_Content_Inventory.xlsx:</p>
+    <div class="prompt">I've now attached the training content inventory. Match training modules to the skill gaps identified. For each module, verify:
+(1) Is it HRD Corp claimable? (PSMB registered provider?)
+(2) Does it lead to SKM certification?
+(3) Is it DSD-accredited?
+(4) Estimate claimable amount from our HRD Corp levy balance
+(5) Recommended delivery format: classroom, e-learning, on-the-job<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 3 — Create 12-month learning pathway <span class="tool-badge">&#9729;&#65039; Copilot Chat (Work)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Create a 12-month personalised learning pathway optimising HRD Corp levy utilisation:
+(1) Prioritise HRD Corp claimable courses first to maximise levy recovery
+(2) Include SKM certification milestones (quarterly checkpoints)
+(3) Track levy utilisation vs HRD Corp contribution (1% of monthly payroll)
+(4) Estimate training ROI: cost vs productivity improvement
+(5) Flag any courses expiring within the current levy year
+
+Format as a month-by-month calendar with costs in RM.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+</div>
+</section>
+
+<!-- ===== EXERCISE 7 ===== -->
+<section id="ex7">
+<div class="activity">
+  <div class="head">
+    <span class="num">EXERCISE 7</span>
+    <span class="time">2:20 – 2:45 · 25 min</span>
+    <span class="file">&#128196; Company_Benefits.xlsx</span>
+    <span class="badge blue">Compensation Manager</span>
+  </div>
+  <h4>Benefits &amp; Compensation Analysis</h4>
+  <p><b>Goal:</b> Benchmark the company's benefits package against Malaysian statutory minimums (EPF 13%/11%, SOCSO RM6,000 ceiling Oct 2024, EIS 0.2%) and MEF/MIHRM market surveys.</p>
+  <p><b>Wow moment:</b> Manual benchmarking spreadsheet work → AI-assisted analysis with actionable compliance gap report.</p>
+
+  <div class="task-step">
+    <div class="step-label">Task 1 — Analyze current benefits vs statutory requirements <span class="tool-badge">&#9729;&#65039; Copilot Chat (Work)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Start a new Copilot Chat. Attach Company_Benefits.xlsx. Use this prompt:</p>
+    <div class="prompt">I've attached Company_Benefits.xlsx. Analyze against Malaysian statutory requirements:
+(1) EPF — are we at minimum 13% employer / 11% employee? Best practice is 15% employer
+(2) SOCSO — compliant with new RM6,000 monthly wage ceiling (effective October 2024)?
+(3) EIS — 0.2% contribution verified and correctly applied?
+(4) Maternity leave — 98 days met or exceeded? (EA 1955 2022 amendment)
+(5) Paternity leave — 7 days met or exceeded? (EA 1955 2022 amendment)
+(6) Annual leave — vs EA 1955 S.60E minimums (8 days at &lt;2 years, 12 days at 2–5 years, 16 days at 5+ years)
+
+For each item: Compliant ✅ / Below minimum ❌ / At risk ⚠️<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 2 — Calculate cost impact of improvements <span class="tool-badge">&#9729;&#65039; Copilot Chat (Work)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Calculate cost impact of the following benefits improvements per Malaysian market standards:
+(1) Increasing EPF employer contribution from 13% to 15%
+(2) Adding extended medical coverage above SOCSO ceiling
+(3) Enhancing maternity support: childcare allowance, extended paid leave
+(4) Adding employee wellness programme (medical screening, EAP)
+
+Show per-employee monthly cost and total annual cost in RM.
+Assume average salary of RM5,000/month and 500 employees.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 3 — Draft executive recommendations <span class="tool-badge">&#9729;&#65039; Copilot Chat (Work)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Create an executive summary benchmarking our benefits vs MEF/MIHRM Malaysian market surveys:
+(1) Where do we stand vs Malaysian market median? (GLC vs MNC vs SME comparison)
+(2) Top 3 gaps that are causing talent retention issues
+(3) Recommended improvements ranked by: (a) compliance urgency (b) cost (c) employee impact
+(4) Compliance checklist: EA 1955, EPF Act 1991, SOCSO Act 1969, EIS Act 2017
+(5) "Best Employer" gap analysis — what we need to reach top quartile
+
+Format for CHRO presentation — max 1 page.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+</div>
+</section>
+
+<!-- ===== EXERCISE 8 ===== -->
+<section id="ex8">
+<div class="activity">
+  <div class="head">
+    <span class="num">EXERCISE 8</span>
+    <span class="time">2:45 – 3:10 · 25 min</span>
+    <span class="file">&#128196; Disciplinary_Cases.xlsx</span>
+    <span class="badge blue">IR Manager</span>
+  </div>
+  <h4>Disciplinary Case Analysis</h4>
+  <p><b>Goal:</b> Analyze disciplinary case data for Industrial Relations Act 1967 compliance, Domestic Inquiry (DI) procedural integrity, and S.20 unfair dismissal risk prevention.</p>
+  <p><b>Wow moment:</b> 3 hours manual case review → Real-time compliance insights with risk flags.</p>
+
+  <div class="task-step">
+    <div class="step-label">Task 1 — Analyze case statistics for IRA 1967 compliance <span class="tool-badge">&#9729;&#65039; Copilot Chat (Work)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Start a new Copilot Chat. Attach Disciplinary_Cases.xlsx. Use this prompt:</p>
+    <div class="prompt">I've attached the disciplinary case data. Analyze for Industrial Relations Act 1967 compliance:
+(1) Were Show Cause Letters (SCL) issued within reasonable time after incident discovery?
+(2) Was Domestic Inquiry properly conducted — impartial panel, right to be heard (natural justice)?
+(3) Classify cases by IRA misconduct categories (gross misconduct, minor misconduct, absenteeism)
+(4) Calculate average resolution time vs IRA Section 20 reasonable timeline expectations
+(5) Flag cases at risk of S.20(1) unfair dismissal claims — list Case IDs
+
+Summary: Total cases | Compliant | At-risk | Dismissed (IRA procedures followed?)<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 2 — Identify patterns and procedural risks <span class="tool-badge">&#9729;&#65039; Copilot Chat (Work)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Identify IRA 1967 compliance patterns and procedural risks across the case data:
+(1) DI procedural completeness — was natural justice observed in all dismissal cases?
+(2) Were employees given sufficient time (48–72 hours minimum) to respond to Show Cause?
+(3) Panel composition — any evidence of conflict of interest or lack of impartiality?
+(4) Documentation gaps that could void termination in Industrial Court (Mahkamah Perusahaan)
+(5) Department or manager patterns — are certain areas generating disproportionate cases?
+
+Flag highest-risk cases and explain WHY they are at risk of being overturned.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 3 — Generate IRA 1967 compliance management report <span class="tool-badge">&#9729;&#65039; Copilot Chat (Work)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Create an IRA 1967 compliance management report:
+(1) Dashboard: cases compliant vs at-risk vs dismissed (with procedural status)
+(2) Top 3 common procedural failures observed in this dataset
+(3) Recommendations to strengthen the Domestic Inquiry process
+(4) Compliance checklist per S.14 EA 1955 (termination notice) and S.20 IRA 1967 (unfair dismissal)
+(5) Manager training needs — what DI competencies are lacking?
+
+Format for HR Director review. Include action items with suggested owners.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+</div>
+</section>
+
+<!-- ===== EXERCISE 9 ===== -->
+<section id="ex9">
+<div class="activity">
+  <div class="head">
+    <span class="num">EXERCISE 9</span>
+    <span class="time">3:10 – 3:30 · 20 min</span>
+    <span class="file">&#127760; Web search — no file needed</span>
+    <span class="badge blue">IR Specialist</span>
+  </div>
+  <h4>IR Court Award Research</h4>
+  <p><b>Goal:</b> Research Malaysian Industrial Court (Mahkamah Perusahaan) awards, S.20 unfair dismissal rulings, and the maximum 24-month backwages precedent under IRA 1967 S.30(6A).</p>
+  <p><b>Wow moment:</b> 3 hours reading lengthy IR court reports → 30 minutes with Copilot web research and cited case summaries.</p>
+
+  <div class="task-step">
+    <div class="step-label">Task 1 — Research recent IR Court awards <span class="tool-badge">&#9729;&#65039; Copilot Chat (Web search)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Start a new Copilot Chat. No file needed — Copilot Chat will search the web:</p>
+    <div class="prompt">Search the web for recent Malaysian Industrial Court (Mahkamah Perusahaan) awards from 2024–2026. Focus on:
+(1) Fraudulent misconduct cases — theft, cheating, criminal breach of trust (CBT)
+(2) Reinstatement orders vs compensation-in-lieu awards
+(3) S.30(6A) backwages calculations — maximum 24 months under IRA 1967
+(4) Cases where employer procedures were found deficient
+
+Reference official sources: Industrial Court Gazette (Warta Kerajaan), MyKehakiman portal.
+Provide case numbers and citations where available.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 2 — Research unfair dismissal winning and losing factors <span class="tool-badge">&#9729;&#65039; Copilot Chat (Web search)</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Research S.20 IRA 1967 unfair dismissal cases. Analyse what made employers LOSE and WIN:
+
+Employers LOST when: (typical reasons from court awards)
+Employers WON when: (typical reasons from court awards)
+
+Key focus areas:
+(1) DI procedural failures that voided termination (inadequate notice, biased panel)
+(2) Insufficient or inadmissible evidence presented at Domestic Inquiry
+(3) Disproportionate punishment — penalty too harsh for the misconduct
+(4) Successful defences — proper documentation, fair process, proportionate action
+
+Include at least 3 case citations per category.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Task 3 — Create Malaysian IR Reference Guide <span class="tool-badge">&#9729;&#65039; Copilot Chat</span></div>
+    <p style="font-size:13px;color:var(--muted);margin:6px 0 8px">Continue the same conversation:</p>
+    <div class="prompt">Compile an IR Reference Guide for Malaysian HR practitioners:
+
+(1) Key Mahkamah Perusahaan precedents HR must know (top 10 landmark cases)
+(2) IRA 1967 S.20 — step-by-step unfair dismissal process from DI to Industrial Court
+(3) S.30 remedies available: reinstatement, backwages (max 24 months), compensation
+(4) Domestic Inquiry (DI) checklist per Malaysian HR best practices (MEF guidelines)
+(5) Red flags: when to escalate to external IR counsel (MEF, MIHRM referrals)
+(6) Key differences between misconduct termination vs redundancy vs VSEP
+
+Format as a quick-reference guide for HR managers — clear headers, bullet points, actionable steps.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+</div>
+</section>
+
+<!-- FILES SECTION -->
+<section id="files">
+<div class="modulehead"><div class="num">&#128196;</div><h2>Sample Files<small>Generate or use these for the exercises</small></h2></div>
+<div class="card">
+  <p class="lead">All exercises use sample/anonymised Contoso Malaysia data. Generate the files using Copilot Chat (see prompts below) or ask your facilitator for pre-prepared files.</p>
+  <table>
+    <thead>
+      <tr><th>#</th><th>File</th><th>Used In</th><th>Description</th><th>Generate with Copilot</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><b>Employee_Handbook.docx</b><br><small>+ Leave_Policy.docx<br>+ Benefits_Guide.docx</small></td>
+        <td>Ex 1, 2</td>
+        <td>Complete employee handbook aligned with EA 1955 (2022 amendments). Includes leave entitlements, EPF/SOCSO/EIS, maternity 98 days, paternity 7 days, FWA S.60P.</td>
+        <td><button class="copy" style="position:static;background:#1a2552;color:#e2e8f0;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer" onclick="cp(this)" data-text="Create an Employee Handbook for Contoso Malaysia (25 pages) aligned with Employment Act 1955 (2022 amendments). Include: (1) Leave policy: annual leave by tenure, sick leave, maternity 98 days, paternity 7 days (2) Benefits: EPF 13%/15%, SOCSO RM6,000 ceiling, EIS 0.2% (3) Flexible Working Arrangement procedures per S.60P (4) Anti-discrimination policy per S.60L (5) Grievance procedures (6) Notice periods per S.12 (7) Overtime policy per S.60A. Company: diversified conglomerate in automotive, ports, plantation, energy, and property. Format as a professional HR policy document.">Copy prompt</button></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><b>Sample_CV_1.docx</b><br><small>+ Sample_CV_2.docx<br>+ Sample_CV_3.docx</small></td>
+        <td>Ex 2</td>
+        <td>3 sample CVs with Malaysian qualifications (UiTM, UM, USM degrees), HRDF certifications, local company experience.</td>
+        <td><button class="copy" style="position:static;background:#1a2552;color:#e2e8f0;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer" onclick="cp(this)" data-text="Create 3 sample CVs for Malaysian candidates applying for an HR Manager role: Candidate 1 (strong match): UiTM HR degree, 7 years experience in GLC, MIHRM member, HRD Corp certified trainer. Candidate 2 (partial match): UM Psychology degree, 4 years in MNC, some HR experience mixed with admin. Candidate 3 (weak match): STPM, 2 years as payroll clerk, limited HR exposure. All CVs should use realistic Malaysian names, IC numbers redacted, Malaysian companies as employers, local qualifications (SPM, STPM, MQA-accredited degrees). Do NOT include gender, marital status, age, religion in the CVs.">Copy prompt</button></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><b>Job_Description.docx</b></td>
+        <td>Ex 2, 3</td>
+        <td>Job description for a technical or HR role with clear competencies and MQA qualification requirements.</td>
+        <td><button class="copy" style="position:static;background:#1a2552;color:#e2e8f0;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer" onclick="cp(this)" data-text="Create a Job Description for Senior HR Manager at Contoso Malaysia. Include: Role purpose, reporting line to Group HR Director. Requirements: Degree in Human Resource Management or related field (MQA accredited), minimum 7 years HR generalist experience, MIHRM membership preferred, knowledge of EA 1955, IRA 1967, EPF Act, SOCSO Act. Key responsibilities: HR policy management, talent acquisition oversight, industrial relations, compensation benchmarking, HRD Corp levy management. Competencies: NOSS Level 5 HR Management, MEF certified preferred. Note: Applications assessed on merit per EA 1955 S.60L — no discriminatory criteria.">Copy prompt</button></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><b>Employee_Skills.xlsx</b></td>
+        <td>Ex 6</td>
+        <td>Employee competency data with 50 rows. Skills, current levels, assessment dates, gap vs required level.</td>
+        <td><button class="copy" style="position:static;background:#1a2552;color:#e2e8f0;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer" onclick="cp(this)" data-text="Create a sample Employee_Skills.xlsx with 50 rows. Columns: Employee_ID, Department, Skill_Name, Current_Level (1-5), Required_Level (1-5), Gap, Assessment_Date, HRD_Corp_Claimable (Yes/No), SKM_Relevant (Yes/No). Include skills across: HR generalist skills, employment law knowledge (EA 1955, IRA 1967), recruitment and assessment, learning and development, payroll and compensation, industrial relations. Use Malaysian department names (HR Strategy, Talent Acquisition, L&D, Compensation, Employee Relations). Mix of skill levels to show realistic gaps.">Copy prompt</button></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><b>Training_Content_Inventory.xlsx</b></td>
+        <td>Ex 6</td>
+        <td>100 training modules with HRD Corp claimable status, SKM certification links, DSD accreditation, costs.</td>
+        <td><button class="copy" style="position:static;background:#1a2552;color:#e2e8f0;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer" onclick="cp(this)" data-text="Create a Training_Content_Inventory.xlsx with 100 rows. Columns: Module_ID, Module_Name, Skills_Covered, Duration_Days, Format (Classroom/E-learning/OJT), HRD_Corp_Claimable (Yes/No), PSMB_Provider (Yes/No), SKM_Certification (Yes/No), DSD_Accredited (Yes/No), Cost_RM, Claimable_Amount_RM. Include training on: EA 1955 / IRA 1967 compliance, recruitment interviewing, compensation benchmarking, HRD Corp administration, industrial relations, leadership, digital HR tools. Mix of claimable and non-claimable programs. Realistic Malaysian training providers and RM costs.">Copy prompt</button></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><b>Company_Benefits.xlsx</b></td>
+        <td>Ex 7</td>
+        <td>Current benefits package with costs, coverage, statutory requirement references, and compliance status.</td>
+        <td><button class="copy" style="position:static;background:#1a2552;color:#e2e8f0;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer" onclick="cp(this)" data-text="Create a Company_Benefits.xlsx for Contoso Malaysia with 30 rows. Columns: Benefit_Name, Category (Statutory/Contractual/Discretionary), Current_Coverage, Statutory_Minimum, Compliance_Status, Annual_Cost_RM, EA_1955_Reference, Notes. Include: EPF (employer 13%), SOCSO (RM5,500 current ceiling — note RM6,000 update Oct 2024), EIS 0.2%, Maternity 90 days (below EA 1955 98-day requirement — flag this), Paternity 7 days, Annual leave per EA 1955, Medical panel, Hospitalization, Group PA, Performance bonus. Deliberately include 2-3 items below statutory minimum to create interesting analysis.">Copy prompt</button></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><b>Disciplinary_Cases.xlsx</b></td>
+        <td>Ex 8</td>
+        <td>100+ disciplinary case records with Case_ID, dates, type, DI status, outcome, and resolution time.</td>
+        <td><button class="copy" style="position:static;background:#1a2552;color:#e2e8f0;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer" onclick="cp(this)" data-text="Create a Disciplinary_Cases.xlsx with 100 rows for Contoso Malaysia. Columns: Case_ID, Incident_Date, SCL_Issue_Date, DI_Date, Resolution_Date, Department, Misconduct_Type (Gross/Minor/Absenteeism/Insubordination/Fraud), Severity (High/Medium/Low), DI_Conducted (Yes/No), Panel_Impartial (Yes/No), Outcome (Dismissed/Warning/Suspended/Cleared), Resolution_Days, IRA_Risk_Flag (Yes/No), Notes. Include: 15 dismissal cases with mixed DI quality, 30 written warning cases, 20 absenteeism cases, 10 fraud/CBT cases (high risk), 5 cases with procedural gaps (no SCL issued, biased panel). All data anonymized — no real names. Use Employee_ID format.">Copy prompt</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<!-- TIPS -->
+<section id="tips">
+<div class="modulehead"><div class="num">&#128161;</div><h2>Tips &amp; Quick Prompts<small>Get the most out of Copilot Chat for HR</small></h2></div>
+<div class="card">
+  <h4>Quick-start prompts</h4>
+
+  <div class="task-step">
+    <div class="step-label">Check EA 1955 Leave Entitlements</div>
+    <div class="prompt">What are the current leave entitlements under Employment Act 1955 (2022 amendments)? Include: annual leave by tenure, sick leave, maternity (98 days), paternity (7 days), hospitalisation, and emergency leave provisions.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">Minimum Wages Quick Check</div>
+    <div class="prompt">What is the current minimum wage in Malaysia under the Minimum Wages Order 2024? When did RM1,700 take effect? Are there any exceptions for small employers (&lt;5 employees)?<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">EPF/SOCSO/EIS Rate Check</div>
+    <div class="prompt">Confirm the current statutory contribution rates in Malaysia: EPF employer and employee percentages, SOCSO monthly wage ceiling (note: RM6,000 effective October 2024), and EIS 0.2% contribution. Are there any pending changes?<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <div class="task-step">
+    <div class="step-label">IRA 1967 Domestic Inquiry Checklist</div>
+    <div class="prompt">Provide a step-by-step Domestic Inquiry (DI) checklist per Industrial Relations Act 1967 Malaysian requirements. Include: Show Cause Letter procedures, DI panel composition rules, employee rights (natural justice), documentation requirements, and timeline guidelines to avoid S.20 unfair dismissal claims.<button class="copy" onclick="cp(this)">Copy</button></div>
+  </div>
+
+  <h4>Copilot Chat tips for HR</h4>
+  <ul>
+    <li><b>Attach multiple files at once</b> — Copilot Chat can reason across all attached documents simultaneously.</li>
+    <li><b>Be specific about legal references</b> — include the Act name and section (e.g., "per EA 1955 S.60L") for more accurate responses.</li>
+    <li><b>Use follow-up prompts</b> — "Drill down on point 3" or "Reformat as a table" without re-uploading files.</li>
+    <li><b>Ask for citations</b> — add "provide source citations" or "reference the relevant legislation" to ground responses.</li>
+    <li><b>Specify output format</b> — "Format as a table", "Write as a policy document", "List as bullet points".</li>
+    <li><b>Bilingual outputs</b> — add "Provide in both Bahasa Malaysia and English" for bilingual HR communications.</li>
+  </ul>
+
+  <div class="callout warn">
+    <b>Always verify:</b> Copilot Chat may not have the latest amendments to Malaysian employment law. Always verify statutory rates (EPF, SOCSO, minimum wage) and court decisions against official government sources: <a href="https://www.mohr.gov.my" target="_blank">Ministry of Human Resources (MOHR)</a>, <a href="https://www.kwsp.gov.my" target="_blank">KWSP/EPF</a>, <a href="https://www.perkeso.gov.my" target="_blank">PERKESO/SOCSO</a>.
+  </div>
+</div>
+
+<div class="card" style="text-align:center;padding:30px">
+  <p style="font-size:13px;color:var(--muted);margin:0">Confidential &nbsp;·&nbsp; Contoso Malaysia &nbsp;·&nbsp; Internal use only &nbsp;·&nbsp; Powered by Microsoft 365 Copilot</p>
+</div>
+</section>
+
+</main>
+</div>
+
+<script>
+function cp(btn){
+  const t = btn.dataset.text || btn.closest('.prompt').textContent.replace('Copy','').replace('Copied!','').trim();
+  navigator.clipboard.writeText(t).then(()=>{
+    const orig=btn.textContent;btn.textContent='Copied!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('copied')},2000);
+  });
+}
+// Active nav highlight on scroll
+const secs=[...document.querySelectorAll('section[id]')];
+const links=[...document.querySelectorAll('nav a')];
+function setActive(){
+  const y=window.scrollY+120;
+  let cur='';
+  secs.forEach(s=>{if(s.offsetTop<=y)cur=s.id});
+  links.forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+}
+window.addEventListener('scroll',setActive,{passive:true});
+setActive();
+</script>
+</body>
+</html>
