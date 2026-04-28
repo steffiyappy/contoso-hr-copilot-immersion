@@ -63,13 +63,21 @@
             .staticrypt-toggle-password-visibility {
                 cursor: pointer;
                 height: 20px;
-                opacity: 60%;
+                opacity: 35%;
                 padding: 13px;
                 position: absolute;
                 right: 0;
                 top: 50%;
                 transform: translateY(-50%);
                 width: 20px;
+                filter: invert(0);
+            }
+
+            @media (prefers-color-scheme: dark) {
+                .staticrypt-toggle-password-visibility {
+                    opacity: 55%;
+                    filter: invert(1);
+                }
             }
 
             .staticrypt-form .staticrypt-decrypt-button {
