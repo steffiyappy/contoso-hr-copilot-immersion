@@ -179,7 +179,7 @@ th{color:var(--accent2);font-weight:600;font-size:12px;text-transform:uppercase;
     <li>A defense brief and key precedents for an S.20 unfair dismissal case</li>
   </ul>
   <div class="callout warn">
-    <b>Tool scope:</b> &#9989; Copilot Chat (Work) with file attachments and web search is all you need. Analyst Agent, Agent Builder, and Excel/Word Copilot agents are <b>not required</b> for any exercise today.
+    <b>Tool scope:</b> &#9989; Microsoft 365 Copilot (Basic) with file attachments and web search is all you need. Analyst Agent, Agent Builder, and Excel/Word Copilot integrations are <b>not required and not available in this session</b> for any exercise today.
   </div>
 </div>
 </section>
@@ -236,7 +236,7 @@ th{color:var(--accent2);font-weight:600;font-size:12px;text-transform:uppercase;
         </div>
         <div class="ex-card">
           <div class="ex-top" style="background:#065f46"><span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.5)">02</span><span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">Chat + Multi-CVs</span></div>
-          <div class="ex-body"><p>Mass Curriculum Vitae (CV) Screening</p><small>30 applications, 1 Job Description (JD). Scored shortlist with per-candidate interview questions.</small></div>
+          <div class="ex-body"><p>Mass Curriculum Vitae (CV) Screening</p><small>30 applications, 1 Job Description (JD). Process in batches of 3 CVs per round.</small></div>
         </div>
       </div>
     </div>
@@ -283,7 +283,7 @@ th{color:var(--accent2);font-weight:600;font-size:12px;text-transform:uppercase;
 <div class="modulehead"><div class="num">&#128295;</div><h2>Tools Today<small>Copilot Chat is all you need</small></h2></div>
 <div class="card">
 <div class="tools-grid">
-  <div class="tool-card"><div class="icon">&#9729;&#65039;</div><h5>Copilot Chat (Work)</h5><p>Single interface for all 6 scenarios. File attachment + web search built in. Everything stays within your Microsoft 365 tenant.</p></div>
+  <div class="tool-card"><div class="icon">&#9729;&#65039;</div><h5>Microsoft 365 Copilot (Basic)</h5><p>Single interface for all 6 scenarios. Go to <b>copilot.microsoft.com</b>. File attachment + web search built in. Sign in with your work account.</p></div>
   <div class="tool-card"><div class="icon">&#128196;</div><h5>File Attachments</h5><p>Attach policy docs, spreadsheets, CVs: up to 10 files per conversation. Copilot reads and reasons across all files simultaneously.</p></div>
   <div class="tool-card"><div class="icon">&#127760;</div><h5>Built-in Web Search</h5><p>No Researcher license needed. Ask for live salary data, court awards, or legislation updates: Copilot cites its sources.</p></div>
   <div class="tool-card"><div class="icon">&#9997;&#65039;</div><h5>Document Drafting</h5><p>Copilot drafts letters, reports, and compliance checklists inside the chat. Copy, refine, and paste directly into Word.</p></div>
@@ -408,8 +408,8 @@ Format: ready to send to Group Chief Human Resources Officer (CHRO) for approval
   <p class="scenario-lead">Attach multiple CVs and the Job Description. Copilot scores each candidate against the Job Description (JD), ensures non-discriminatory assessment per Employment Act 1955 (EA 1955) S.60L, and generates tailored interview questions for the shortlisted candidates.</p>
 
   <div class="task-step">
-    <div class="step-label">Task 1: Screen and score all candidates <span class="tool-badge">&#9729;&#65039; Copilot Chat · Attach 5 CVs + Job_Description.docx</span></div>
-    <p>Start a fresh Copilot Chat. Attach all candidate CVs and the Job Description together:</p>
+    <div class="step-label">Task 1: Screen and score all candidates <span class="tool-badge">&#9729;&#65039; Copilot Chat · Attach 3 CVs + Job_Description.docx</span></div>
+    <p>Start a fresh Copilot Chat. Attach up to 3 CVs and the Job Description (process remaining CVs in a second round if needed):</p>
     <div class="prompt">I've attached [number] CVs and the Job Description for [Role] at Contoso Malaysia.
 
 Screen all candidates against this Job Description (JD) using the following framework:
@@ -677,7 +677,7 @@ Disclaimer: "This draft is for internal review. Please have legal counsel review
     <p>Start a fresh Copilot Chat. Attach Disciplinary_Cases.xlsx:</p>
     <div class="prompt">I've attached our disciplinary case data. You are a Malaysian Industrial Relations expert.
 
-Analyse all cases for Industrial Relations Act 1967 (Industrial Relations Act 1967 (IRA 1967)) compliance. For each case, assess:
+Analyse all cases for Industrial Relations Act 1967 (IRA 1967) compliance. For each case, assess:
 
 PROCEDURAL CHECKLIST:
 1. Was a Show Cause Letter (SCL) issued? If yes, was it within a reasonable time of the incident?
@@ -785,7 +785,7 @@ Research focus:
    - What mitigation of award is usually applied?
 
 Provide: case name / award number / year / outcome for each precedent cited.
-Source: MyKehakiman portal, Industrial Court Gazette (Warta Perindustrian), Current Law Journal (CLJ) Law, legal databases.<button class="copy" onclick="cp(this)">Copy</button></div>
+Source: Search the web for publicly available summaries. Note: MyKehakiman portal and Current Law Journal (CLJ) are subscription-based — Copilot will find publicly indexed summaries and news coverage. Verify exact citations on those platforms before use in legal proceedings.<button class="copy" onclick="cp(this)">Copy</button></div>
   </div>
 
   <div class="task-step">
