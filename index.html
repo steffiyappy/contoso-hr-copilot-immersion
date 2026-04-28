@@ -30,7 +30,7 @@
             .staticrypt-form {
                 position: relative;
                 z-index: 1;
-                background: #1e293b;
+                background: #ffffff;
                 max-width: 360px;
                 margin: 0 auto 100px;
                 padding: 45px;
@@ -45,7 +45,7 @@
                 box-sizing: border-box; /* This ensures padding is included in the total width */
                 font-size: 14px;
                 outline: 0;
-                color: #e2e8f0;
+                color: #1e293b;
                 padding: 15px 30px 15px 15px; /* Adjust the padding to ensure there is space for the icon */
                 width: 100%;
             }
@@ -53,7 +53,7 @@
             .staticrypt-password-container {
                 position: relative;
                 outline: 0;
-                background: #0f172a;
+                background: #f2f2f2;
                 width: 100%;
                 border: 0;
                 margin: 0 0 15px;
@@ -79,7 +79,7 @@
                 width: 100%;
                 border: 0;
                 padding: 15px;
-                color: #e2e8f0;
+                color: #1e293b;
                 font-size: 14px;
                 cursor: pointer;
             }
@@ -103,10 +103,31 @@
             .staticrypt-content {
                 height: 100%;
                 margin-bottom: 1em;
-                background: #0f172a;
+                background: #f0f2f5;
                 font-family: "Arial", sans-serif;
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                .staticrypt-content { background: #f2f2f2; }
+                .staticrypt-form { background: #1e293b !important; }
+                .staticrypt-password-container { background: #0f172a !important; }
+                .staticrypt-form input[type="password"],
+                input[type="text"] { color: #e2e8f0 !important; }
+                .staticrypt-title { color: #f1f5f9 !important; }
+                .staticrypt-instructions { color: #94a3b8 !important; }
+                .staticrypt-hr { border-top-color: #334155 !important; }
+            }
+
+            @media (prefers-color-scheme: light) {
+                .staticrypt-content { background: #f0f2f5; }
+                .staticrypt-form { background: #ffffff !important; }
+                .staticrypt-password-container { background: #f2f2f2 !important; }
+                .staticrypt-form input[type="password"],
+                input[type="text"] { color: #1e293b !important; }
+                .staticrypt-title { color: #1e293b !important; }
+                .staticrypt-instructions { color: #64748b !important; }
             }
 
             .staticrypt-instructions {
