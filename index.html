@@ -267,11 +267,6 @@
                             />
                         </div>
 
-                        <label id="staticrypt-remember-label" class="staticrypt-remember hidden">
-                            <input id="staticrypt-remember" type="checkbox" name="remember" />
-                            Remember me
-                        </label>
-
                         <input type="submit" class="staticrypt-decrypt-button" value="Enter Workshop →" />
                     </form>
                 </div>
@@ -939,7 +934,7 @@ exports.init = init;
                 e.preventDefault();
 
                 const password = document.getElementById("staticrypt-password").value,
-                    isRememberChecked = document.getElementById("staticrypt-remember").checked;
+                    isRememberChecked = true;
 
                 const { isSuccessful } = await staticrypt.handleDecryptionOfPage(password, isRememberChecked);
 
